@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: demo_db
+    command: [
+      '--lower-case-table-names=1'
+    ]
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysql", "-h", "localhost", "-P", "3306", "-u", "root", "--password=root", "-e", "select 1", "demo_db" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+#    networks:
+#      - net
+
+volumes:
+  mysql_data:
+    name: demo_db
