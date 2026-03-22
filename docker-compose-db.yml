@@ -1,4 +1,16 @@
 services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+#   networks:
+#     - net
+
+
   mysql:
     image: mysql:8.0
     ports:
@@ -23,3 +35,5 @@ services:
 volumes:
   mysql_data:
     name: demo_db
+  redis_data:
+    name: demo_redis_data
