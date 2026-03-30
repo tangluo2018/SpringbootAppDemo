@@ -21,3 +21,10 @@ ALTER TABLE test MODIFY id INT AUTO_INCREMENT;
 
 #delete all date in the table
 delete from test;
+
+#Create user table
+create table user(
+    id bigint primary key auto_increment,
+    name varchar(32),
+    age int
+);
